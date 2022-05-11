@@ -1,0 +1,66 @@
+function countDivisibleByThree
+The function/method countDivisibleByThree accepts an argument str representing a string value. The string str contains only digits and it represents an integer.
+
+The function/method countDivisibleByThree must return an integer denoting the number of integers divisible by 3 that can be obtained by changing at most one digit in the given string.
+
+Your task is to implement the function countDivisibleByThree so that the program runs successfully.
+
+IMPORTANT: Do not implement the main() function as it is already defined.
+
+Boundary Condition(s):
+1 <= Length of the given string <= 100
+
+Example Input/Output 1:
+Input:
+23
+
+Output:
+7
+
+Explanation:
+The 7 possible ways are given below.
+03, 21, 24, 27, 33, 63 and 93.
+
+Example Input/Output 2:
+Input:
+100
+
+Output:
+10
+
+Example Input/Output 3:
+Input:
+28041587931619954605240353727
+
+Output:
+69
+C:
+#include <stdio.h>
+int check(char *str){
+    int t=0;
+    printf("%s\n",str);
+    for(int i=0;str[i]!='\0';i++)
+    t+=str[i]-'0';
+    return t%3==0;
+}
+int countDivisibleByThree(char *str){
+    int ans=0;
+    for(int i=0;str[i]!='\0';i++){
+        char t=str[i];
+        for(int j=0;j<=9;j++){
+            if(t=='0'+j)
+            continue;
+            str[i]='0'+j;
+            ans+=check(str);
+        }
+        str[i]=t;
+    }
+    return ans;
+}
+int main()
+{
+    char str[101];
+    scanf("%s", str);
+    printf("%d", countDivisibleByThree(str));
+    return 0;
+}
